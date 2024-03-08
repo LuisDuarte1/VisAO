@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+package visao;
+
+// Interface exported by the server.
+service VisAO {
+
+  rpc GetImages(google.protobuf.Empty) returns (Image) {}
+
+}
+
+message Image{
+  string id = 1;
+  string bloat = 2;
+}

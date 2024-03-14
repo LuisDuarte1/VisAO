@@ -13,5 +13,15 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src")
     }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://backend:8080',
+        rewrite: (path) => path.slice(4),
+        changeOrigin: true
+      }
+    },
+    cors: false
   }
 })

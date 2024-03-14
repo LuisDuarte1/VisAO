@@ -1,0 +1,15 @@
+FROM weastur/poetry:latest-python-3.11-alpine
+
+RUN apk add alpine-sdk
+
+RUN apk add gcc python3-dev musl-dev linux-headers
+
+COPY . /app
+
+WORKDIR /app
+
+RUN poetry install
+
+EXPOSE 8080
+
+CMD poetry run python visao_backend/main.py

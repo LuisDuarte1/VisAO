@@ -13,6 +13,24 @@ import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
 /**
+ * @generated from protobuf message visao.File
+ */
+export interface File {
+    /**
+     * @generated from protobuf field: string id = 1;
+     */
+    id: string;
+}
+/**
+ * @generated from protobuf message visao.FileUpload
+ */
+export interface FileUpload {
+    /**
+     * @generated from protobuf field: bytes file = 1;
+     */
+    file: Uint8Array;
+}
+/**
  * @generated from protobuf message visao.Image
  */
 export interface Image {
@@ -20,23 +38,111 @@ export interface Image {
      * @generated from protobuf field: string id = 1;
      */
     id: string;
-    /**
-     * @generated from protobuf field: string bloat = 2;
-     */
-    bloat: string;
 }
+// @generated message type with reflection information, may provide speed optimized methods
+class File$Type extends MessageType<File> {
+    constructor() {
+        super("visao.File", [
+            { no: 1, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+    create(value?: PartialMessage<File>): File {
+        const message = globalThis.Object.create((this.messagePrototype!));
+        message.id = "";
+        if (value !== undefined)
+            reflectionMergePartial<File>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: File): File {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string id */ 1:
+                    message.id = reader.string();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: File, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string id = 1; */
+        if (message.id !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.id);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message visao.File
+ */
+export const File = new File$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class FileUpload$Type extends MessageType<FileUpload> {
+    constructor() {
+        super("visao.FileUpload", [
+            { no: 1, name: "file", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
+        ]);
+    }
+    create(value?: PartialMessage<FileUpload>): FileUpload {
+        const message = globalThis.Object.create((this.messagePrototype!));
+        message.file = new Uint8Array(0);
+        if (value !== undefined)
+            reflectionMergePartial<FileUpload>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: FileUpload): FileUpload {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* bytes file */ 1:
+                    message.file = reader.bytes();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: FileUpload, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* bytes file = 1; */
+        if (message.file.length)
+            writer.tag(1, WireType.LengthDelimited).bytes(message.file);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message visao.FileUpload
+ */
+export const FileUpload = new FileUpload$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class Image$Type extends MessageType<Image> {
     constructor() {
         super("visao.Image", [
-            { no: 1, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "bloat", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
     create(value?: PartialMessage<Image>): Image {
         const message = globalThis.Object.create((this.messagePrototype!));
         message.id = "";
-        message.bloat = "";
         if (value !== undefined)
             reflectionMergePartial<Image>(this, message, value);
         return message;
@@ -48,9 +154,6 @@ class Image$Type extends MessageType<Image> {
             switch (fieldNo) {
                 case /* string id */ 1:
                     message.id = reader.string();
-                    break;
-                case /* string bloat */ 2:
-                    message.bloat = reader.string();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -67,9 +170,6 @@ class Image$Type extends MessageType<Image> {
         /* string id = 1; */
         if (message.id !== "")
             writer.tag(1, WireType.LengthDelimited).string(message.id);
-        /* string bloat = 2; */
-        if (message.bloat !== "")
-            writer.tag(2, WireType.LengthDelimited).string(message.bloat);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -84,5 +184,6 @@ export const Image = new Image$Type();
  * @generated ServiceType for protobuf service visao.VisAO
  */
 export const VisAO = new ServiceType("visao.VisAO", [
-    { name: "GetImages", options: {}, I: Empty, O: Image }
+    { name: "GetImages", options: {}, I: Empty, O: Image },
+    { name: "UploadFile", options: {}, I: FileUpload, O: File }
 ]);

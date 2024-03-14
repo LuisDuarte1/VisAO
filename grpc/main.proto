@@ -8,9 +8,18 @@ service VisAO {
 
   rpc GetImages(google.protobuf.Empty) returns (Image) {}
 
+  rpc UploadFile(FileUpload) returns (File) {}
+
+}
+
+message File {
+  string id = 1;
+}
+
+message FileUpload {
+  bytes file = 1;
 }
 
 message Image{
   string id = 1;
-  string bloat = 2;
 }

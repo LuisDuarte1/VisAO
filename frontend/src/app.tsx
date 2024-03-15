@@ -5,7 +5,9 @@ import "./globals.css";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
-import { GRPCContext, createGRPCContext } from "./lib/context";
+import { GRPCContext, createGRPCContext, queryClient } from "./lib/context";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -24,7 +26,10 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <GRPCContext.Provider value={createGRPCContext()}>
-        <RouterProvider router={router} />
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false}/>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
       </GRPCContext.Provider>
     </StrictMode>,
   );

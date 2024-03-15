@@ -5,6 +5,7 @@ import "./globals.css";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
+import { GRPCContext, createGRPCContext } from "./lib/context";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -22,7 +23,9 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <GRPCContext.Provider value={createGRPCContext()}>
+        <RouterProvider router={router} />
+      </GRPCContext.Provider>
     </StrictMode>,
   );
 }

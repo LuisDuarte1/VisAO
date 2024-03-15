@@ -1,31 +1,27 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { GrpcWebFetchTransport } from "@protobuf-ts/grpcweb-transport";
-import { VisAOClient } from "@/gen/main.client";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useContext } from "react";
+import { GRPCContext } from "@/lib/context";
 
 export const Route = createLazyFileRoute("/")({
   component: Index,
 });
 
 function Index() {
+  const grpc = useContext(GRPCContext);
+
   async function handleFileUpload(
     event: ChangeEvent<HTMLInputElement>,
   ): Promise<void> {
-    const transport = new GrpcWebFetchTransport({
-      baseUrl: "http://localhost:5173/api",
-    });
-    const client = new VisAOClient(transport);
     if (event.target.files == null) {
       throw new Error("File list is empty");
     }
-
     const file: File | null = event.target.files.item(0);
     if (file == null) {
       throw new Error("Could not find first file...");
     }
-    const a = await client.uploadFile({
+    const a = await grpc.client.uploadFile({
       file: new Uint8Array(await file.arrayBuffer()),
     });
     console.log(a.response);

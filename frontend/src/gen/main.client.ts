@@ -4,11 +4,9 @@
 import type { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
 import { VisAO } from "./main";
+import { stackIntercept } from "@protobuf-ts/runtime-rpc";
 import type { File } from "./main";
 import type { FileUpload } from "./main";
-import { stackIntercept } from "@protobuf-ts/runtime-rpc";
-import type { Image } from "./main";
-import type { Empty } from "./google/protobuf/empty";
 import type { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
 /**
@@ -17,10 +15,6 @@ import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
  * @generated from protobuf service visao.VisAO
  */
 export interface IVisAOClient {
-    /**
-     * @generated from protobuf rpc: GetImages(google.protobuf.Empty) returns (visao.Image);
-     */
-    getImages(input: Empty, options?: RpcOptions): UnaryCall<Empty, Image>;
     /**
      * @generated from protobuf rpc: UploadFile(visao.FileUpload) returns (visao.File);
      */
@@ -38,17 +32,10 @@ export class VisAOClient implements IVisAOClient, ServiceInfo {
     constructor(private readonly _transport: RpcTransport) {
     }
     /**
-     * @generated from protobuf rpc: GetImages(google.protobuf.Empty) returns (visao.Image);
-     */
-    getImages(input: Empty, options?: RpcOptions): UnaryCall<Empty, Image> {
-        const method = this.methods[0], opt = this._transport.mergeOptions(options);
-        return stackIntercept<Empty, Image>("unary", this._transport, method, opt, input);
-    }
-    /**
      * @generated from protobuf rpc: UploadFile(visao.FileUpload) returns (visao.File);
      */
     uploadFile(input: FileUpload, options?: RpcOptions): UnaryCall<FileUpload, File> {
-        const method = this.methods[1], opt = this._transport.mergeOptions(options);
+        const method = this.methods[0], opt = this._transport.mergeOptions(options);
         return stackIntercept<FileUpload, File>("unary", this._transport, method, opt, input);
     }
 }

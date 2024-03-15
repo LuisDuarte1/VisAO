@@ -16,4 +16,4 @@ export function createGRPCContext() {
   };
 }
 
-export const queryClient = new QueryClient()
+export const queryClient = new QueryClient();

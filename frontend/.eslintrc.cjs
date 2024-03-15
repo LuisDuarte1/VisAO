@@ -17,4 +17,12 @@ module.exports = {
     ],
     'prettier/prettier': ["error"]
   },
+  overrides: [
+    {
+      files: ["src/components/ui/**"],
+      rules: {
+        "react-refresh/only-export-components": "off"
+      }
+    }
+  ]
 }

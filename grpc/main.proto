@@ -6,8 +6,6 @@ package visao;
 // Interface exported by the server.
 service VisAO {
 
-  rpc GetImages(google.protobuf.Empty) returns (Image) {}
-
   rpc UploadFile(FileUpload) returns (File) {}
 
 }
